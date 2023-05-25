@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.User;
-import model.UserDAO;
+import com.model.dao.UserDAO;
+import com.model.entity.User;
 
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
@@ -63,7 +63,7 @@ public class RegistrationServlet extends HttpServlet {
 			
 			try {
 				userDao.registerUser(user);
-			}catch(ClassNotFoundException e) {
+			}catch(Exception e) {
 				e.printStackTrace();
 			}
 			noError.append("Аккаунт успешно зарегистрирован");

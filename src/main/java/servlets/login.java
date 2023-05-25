@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.User;
-import model.UserDAO;
+import com.model.dao.UserDAO;
+import com.model.entity.User;
 
 @WebServlet("/login")
 public class login extends HttpServlet {
