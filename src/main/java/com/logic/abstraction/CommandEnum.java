@@ -6,7 +6,8 @@ public enum CommandEnum {
 	
 	Home(new HomeCP(), "/index.jsp"),
 	ErrorPage404(new ErrorPage404CP(), "/404.jsp"),
-	Catalog(new CatalogCP(), "/show-images.jsp");
+	Catalog(new CatalogCP(), "/show-images.jsp"),
+	AdminTableView(new AdminTableViewCP(), "/admin-table-view.jsp");
 	
 	private ICommandProcessor command;
 	private String view;
