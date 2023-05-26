@@ -14,8 +14,6 @@ import com.logic.abstraction.ICommandProcessorAJAX;
 
 @WebServlet("/ControllerAJAX")
 public class ControllerAJAX extends HttpServlet {
-	
-	private static final String CONTENT_TYPE = "text/html; charset=UTF-8";
        
     public ControllerAJAX() {
         super();
@@ -31,20 +29,11 @@ public class ControllerAJAX extends HttpServlet {
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.setContentType(CONTENT_TYPE);
-		
-		PrintWriter out = response.getWriter();
-		
-		String ajaxResponseText = "";
-		
 		ICommandProcessorAJAX commandProcessor = CommandFactoryAJAX.getCommand(request);
 		
-		ajaxResponseText = commandProcessor.execute(request, response);
-		
-		out.println(ajaxResponseText);
-		
-		out.close();
-		
+		//ajaxResponseText = commandProcessor.execute(request, response).toString();
+		commandProcessor.execute(request, response);
+		//out.println(ajaxResponseText);
 		
 	}
 }

@@ -17,18 +17,11 @@
 	<div id="tableDiv">
 		
 	</div>
-	<!-- <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-	<script>
-		document.getElementById('tableSelect').addEventListener('change', function(){
-			console.log(this.value);
-		
-			$.ajax({url: "/ControllerAJAX?ActionCommand=" + this.value,
-					success: function(data){$("#tableDiv").html(data);} });
-		});
-	</script>-->
+
 	<script type="text/javascript">
 		document.getElementById('tableSelect').addEventListener('change', function()
 			{
+				var table = this.value;
 				var xhr = new XMLHttpRequest();
 				xhr.onreadystatechange = function() 
 				{
@@ -38,11 +31,19 @@
 				      	} else {
 				        	console.error('Request failed.  Returned status of ' + xhr.status);
 				      	}
+				      	
+				      	var script = document.createElement('script');
+				    	script.src = '/js/edit' + table + '.js';
+				    	script.onload = function() {
+				    		console.log('editTableUser_acc.js is uploaded')
+				    	};
+				    	document.head.appendChild(script);
 				    }
 				};
-				xhr.open('GET', '/ControllerAJAX?ActionCommand=' + this.value);
+				xhr.open('GET', '/ControllerAJAX?ActionCommand=' + table);
 				xhr.send();
 			});
 	</script>
+	
 </body>
 </html>
