@@ -8,14 +8,14 @@ import com.logic.abstraction.IEnumFactoryEntity;
 import com.logic.enums.CommandNameEnum;
 import com.utils.NextPage;
 
-public class AdminTableViewCP implements ICommandProcessor {
+public class LoginCP implements ICommandProcessor {
 
 	@Override
 	public NextPage execute(HttpServletRequest request, HttpServletResponse response, 
 			NextPage nextPage, IEnumFactoryEntity specEnum) {
 		
 		nextPage.setRedirectType(NextPage.REDIRECT_TYPE_REDIRECT);
-		nextPage.setPage(specEnum.getMyView(CommandNameEnum.AdminTableView.getName()));
+		nextPage.setPage(specEnum.getMyView(CommandNameEnum.Login.getName()));
 		
 		return nextPage;
 	}

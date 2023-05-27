@@ -7,5 +7,7 @@ import com.utils.NextPage;
 
 public interface ICommandProcessor {
 	
-	NextPage execute (HttpServletRequest request, HttpServletResponse response, NextPage nextPage);
+	NextPage execute (HttpServletRequest request, HttpServletResponse response, 
+			NextPage nextPage, IEnumFactoryEntity specEnum);
+	
 }

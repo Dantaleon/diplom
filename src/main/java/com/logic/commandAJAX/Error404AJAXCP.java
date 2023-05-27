@@ -6,9 +6,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.logic.abstraction.CommandEnum;
-import com.logic.abstraction.CommandEnumAJAX;
 import com.logic.abstraction.ICommandProcessorAJAX;
+import com.logic.enums.CommandNameEnum;
+import com.logic.enums.CommandEnumAJAX;
 
 public class Error404AJAXCP implements ICommandProcessorAJAX {
 

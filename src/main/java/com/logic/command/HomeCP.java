@@ -3,18 +3,19 @@ package com.logic.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.logic.abstraction.CommandEnum;
 import com.logic.abstraction.ICommandProcessor;
+import com.logic.abstraction.IEnumFactoryEntity;
+import com.logic.enums.CommandNameEnum;
 import com.utils.NextPage;
 
 public class HomeCP implements ICommandProcessor {
 
 	@Override
 	public NextPage execute(HttpServletRequest request, HttpServletResponse response,
-			NextPage nextPage) {
+			NextPage nextPage, IEnumFactoryEntity specEnum) {
 		
 		nextPage.setRedirectType(NextPage.REDIRECT_TYPE_REDIRECT);
-		nextPage.setPage(CommandEnum.Home.getView());
+		nextPage.setPage(specEnum.getMyView(CommandNameEnum.Home.getName()));
 		
 		System.out.println("HomeCP ended " + nextPage.getPage() + 
 				" " + nextPage.getRedirectType());
