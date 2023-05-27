@@ -2,7 +2,9 @@ package com.logic.abstraction;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class CommandFactoryAJAX {
+import com.logic.enums.CommandEnumAJAX;
+
+public final class CommandFactoryAJAX {
 	
 	private CommandFactoryAJAX() {
 	}

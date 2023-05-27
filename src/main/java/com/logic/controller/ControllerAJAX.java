@@ -31,9 +31,7 @@ public class ControllerAJAX extends HttpServlet {
 		
 		ICommandProcessorAJAX commandProcessor = CommandFactoryAJAX.getCommand(request);
 		
-		//ajaxResponseText = commandProcessor.execute(request, response).toString();
 		commandProcessor.execute(request, response);
-		//out.println(ajaxResponseText);
 		
 	}
 }
