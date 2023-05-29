@@ -15,7 +15,7 @@ public class ErrorPage404CP implements ICommandProcessor {
 			NextPage nextPage, IEnumFactoryEntity specEnum) {
 		
 		nextPage.setRedirectType(NextPage.REDIRECT_TYPE_FORWARD);
-		nextPage.setPage(specEnum.getMyView(CommandNameEnum.ErrorPage404.getName()));
+		nextPage.setPage(specEnum.getMyView(CommandNameEnum.ErrorPage404.name()));
 		
 		return nextPage;
 	}

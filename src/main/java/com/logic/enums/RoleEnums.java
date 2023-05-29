@@ -1,21 +1,22 @@
 package com.logic.enums;
 
-import com.logic.abstraction.ICommandProcessor;
-import com.logic.abstraction.ICommandProcessorAJAX;
-import com.logic.enums.*;
-
 public enum RoleEnums {
 	
-	administrator(CommandEnumAdmin.INSTANCE, CommandEnumAdminAJAX.INSTANCE),
-	user(CommandEnumUser.INSTANCE, CommandEnumUserAJAX.INSTANCE),
-	guest(CommandEnumGuest.INSTANCE, CommandEnumGuestAJAX.INSTANCE);
+	administrator(CommandEnumAdmin.INSTANCE, CommandEnumAdminAJAX.INSTANCE, 
+			"/WEB-INF/jsp/navigations/adminNavigation.jsp"),
+	user(CommandEnumUser.INSTANCE, CommandEnumUserAJAX.INSTANCE,
+			"/WEB-INF/jsp/navigations/userNavigation.jsp"),
+	guest(CommandEnumGuest.INSTANCE, CommandEnumGuestAJAX.INSTANCE,
+			"/WEB-INF/jsp/navigations/guestNavigation.jsp");
 	
 	private Enum<?> simpleEnum;
 	private Enum<?> ajaxEnum;
+	private String headerPath;
 	
-	RoleEnums(Enum<?> simpleEnum, Enum<?> ajaxEnum) {
+	RoleEnums(Enum<?> simpleEnum, Enum<?> ajaxEnum, String headerPath) {
 		this.simpleEnum = simpleEnum;
 		this.ajaxEnum = ajaxEnum;
+		this.headerPath = headerPath;
 	}
 
 	public Enum<?> getSimpleEnum() {
@@ -26,4 +27,7 @@ public enum RoleEnums {
 		return ajaxEnum;
 	}
 	
+	public String getHeaderPath() {
+		return headerPath;
+	}
 }

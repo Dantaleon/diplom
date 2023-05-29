@@ -3,24 +3,24 @@ package com.logic.enums;
 import com.logic.abstraction.ICommandProcessor;
 import com.logic.abstraction.IEnumFactoryEntity;
 import com.logic.command.AboutCP;
-import com.logic.command.AdminTableViewCP;
 import com.logic.command.CatalogCP;
 import com.logic.command.ContactCP;
 import com.logic.command.ErrorPage404CP;
 import com.logic.command.HomeCP;
 import com.logic.command.LoginCP;
 import com.logic.command.RegistrationCP;
+import com.logic.commandAJAX.HeaderIncludeCP;
 
 public enum CommandEnumGuest implements IEnumFactoryEntity {
 	
 	INSTANCE,
-	Home(new HomeCP(), "/index.jsp"),
-	Catalog(new CatalogCP(), "/view3images.jsp"),
-	Login(new LoginCP(), "/login.jsp"),
-	Registration(new RegistrationCP(), "/registration.jsp"),
-	Contact(new ContactCP(), "/contact.jsp"),
-	About(new AboutCP(), "/about.jsp"),
-	ErrorPage404(new ErrorPage404CP(), "/404.jsp");
+	Home(new HomeCP(), "/WEB-INF/jsp/index.jsp"),
+	Catalog(new CatalogCP(), "/WEB-INF/jsp/view3images.jsp"),
+	Login(new LoginCP(), "/WEB-INF/jsp/login.jsp"),
+	Registration(new RegistrationCP(), "/WEB-INF/jsp/registration.jsp"),
+	Contact(new ContactCP(), "/WEB-INF/jsp/contact.jsp"),
+	About(new AboutCP(), "/WEB-INF/jsp/about.jsp"),
+	ErrorPage404(new ErrorPage404CP(), "/WEB-INF/jsp/404.jsp");
 	
 	private ICommandProcessor command;
 	private String view;

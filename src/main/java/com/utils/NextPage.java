@@ -8,8 +8,11 @@ public class NextPage {
 	public static final String REDIRECT_TYPE_FORWARD = "forward";
 	public static final String REDIRECT_TYPE_REDIRECT = "redirect";
 	
-	public static final String CONTENT_TYPE_JSP = "html/jsp; charset=UTF-8";
-	public static final String CONTENT_TYPE_JSON = "application/json; charset=UTF-8";
+	public static final String CONTENT_TYPE_TEXT = "txt/html";
+	public static final String CONTENT_TYPE_JSP = "html/jsp";
+	public static final String CONTENT_TYPE_JSON = "application/json;";
+	
+	public static final String CONTENT_CHARSET_UTF8 = "UTF-8";
 	
 	public NextPage(String page, String redirectType) {
 		

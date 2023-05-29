@@ -14,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.postgresql.util.PSQLException;
 
+import com.logic.enums.RoleEnums;
 import com.model.abstraction.HasGenericPK;
 import com.model.datasource.AdminDataSource;
 import com.model.datasource.UserDataSource;
@@ -34,22 +35,18 @@ public class UserDAO implements HasGenericPK<BigDecimal> {
 	public int registerUser(User user) {	
 		int result = 0;
 		
-		//String INSERT_USER_ACC_SQL = 
-//				"INSERT INTO User_acc(nickname, email, password)" +
-//				"VALUES(?, ?, ?)";
 		String INSERT_USER_ACC_SQL = 
-				"DELETE FROM user_acc WHERE email = ? AND password = ?";
+				"INSERT INTO User_acc(nickname, email, password)" +
+				"VALUES(?, ?, ?)";
+		
 		try{
-			ResultSet rs = null;
 			
 			Connection conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(INSERT_USER_ACC_SQL);
 			
-			//ps.setString(1, user.getNickname());
-			//ps.setString(2, user.getEmail());
-			//ps.setString(3, user.getPassword());
-			ps.setString(1, "testn1@mail.ru");
-			ps.setString(2, "test1");
+			ps.setString(1, user.getNickname());
+			ps.setString(2, user.getEmail());
+			ps.setString(3, user.getPassword());
 			
 			System.out.println(ps);
 			
@@ -58,8 +55,10 @@ public class UserDAO implements HasGenericPK<BigDecimal> {
 			ps.close();
 			conn.close();
 			
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
+			
 		}
 		
 		return result;
@@ -117,44 +116,26 @@ public class UserDAO implements HasGenericPK<BigDecimal> {
 		BigDecimal result = BigDecimal.ZERO;
 		
 		String CHECK_USER_FIELD = "SELECT id FROM user_acc WHERE email = ?";
-		
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		}
-		
-		try(Connection connection = DriverManager.getConnection
-				(
-					"jdbc:postgresql://localhost/windows", "admin", "admin1");
-					PreparedStatement ps2 = connection.prepareStatement(CHECK_USER_FIELD, 
-							ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-				)
-		{
-				ps2.setString(1, email);
 				
-				System.out.println(ps2);
-				
-				ResultSet rs = ps2.executeQuery();
-				
-				rs.last();
+		try{
+			Connection conn = dataSource.getConnection();
+			PreparedStatement pstm = conn.prepareStatement(CHECK_USER_FIELD);
+			
+			pstm.setString(1, email);
+			
+			System.out.println(pstm);
+			
+			ResultSet rs = pstm.executeQuery();
+			
+			if (rs.next()) {
 				result = rs.getBigDecimal(1);
-				rs.beforeFirst();
-				
-				System.out.println(result);
-				
+			}
+			
+			System.out.println(result);
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
-		return result;
-	}
-	
-	public boolean giveRoleToUser(Role role, User user) {
-		boolean result = false;
-		
-		
 		
 		return result;
 	}
@@ -281,6 +262,55 @@ public class UserDAO implements HasGenericPK<BigDecimal> {
 		
 		
 		return null;
+	}
+	
+	
+	public boolean userHasRole(BigDecimal id, String roleName) {
+
+		String SELECT_ROLE_BY_USER_PK = 
+			"SELECT role.name FROM role "
+			+"RIGHT JOIN users_roles ON role.id = users_roles.role_id "
+			+"RIGHT JOIN user_acc ON users_roles.user_id = user_acc.id "
+			+"WHERE role.name = ? AND user_acc.id = ?";
+		
+		try {
+			ResultSet rs = null;
+			
+			Connection conn = dataSource.getConnection();
+			
+			PreparedStatement ps = conn.prepareStatement(SELECT_ROLE_BY_USER_PK);
+			ps.setString(1, roleName);
+			ps.setBigDecimal(2, id);
+			
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				
+				return true;
+			}
+			
+			ps.close();
+			rs.close();
+			conn.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	public String getTopRole(BigDecimal id) {
+		
+		boolean isAdmin = userHasRole(id, RoleEnums.administrator.name());
+		boolean isUser = userHasRole(id, RoleEnums.user.name());
+		boolean isGuest = userHasRole(id, RoleEnums.guest.name());
+		
+		String role = "";
+		if (isAdmin) return RoleEnums.administrator.name();
+		if (isUser) return RoleEnums.user.name();
+		if (isGuest) return RoleEnums.guest.name();
+		
+		return RoleEnums.guest.name();
 	}
 	
 	public String getAllRecordsJSON(ArrayList<User> userList) {

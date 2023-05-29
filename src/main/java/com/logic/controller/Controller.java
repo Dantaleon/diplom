@@ -37,16 +37,10 @@ public class Controller extends HttpServlet {
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
-		NextPage nextPage = new NextPage(CommandEnumGuest.ErrorPage404.getView(), NextPage.REDIRECT_TYPE_REDIRECT);
-		//NextPage nextPage = null;
+		NextPage nextPage = new NextPage(CommandEnumGuest.Home.getView(), NextPage.REDIRECT_TYPE_FORWARD);
 		
 		IEnumFactoryEntity specEnum = EnumFactory.getSimpleEnum(request);
-	
-		//int number = specEnum.valueOf("red").getIntColor();
-		
-		System.out.println("Role: " + Resources.getRoleStr(request));
-		//System.out.println("COLOR IS " + number);
-		
+
 		ICommandProcessor commandProcessor = CommandFactory.getCommand(request, specEnum);
 		
 		nextPage = commandProcessor.execute(request, response, nextPage, specEnum);

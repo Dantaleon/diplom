@@ -14,8 +14,8 @@ public class CatalogCP implements ICommandProcessor {
 	public NextPage execute(HttpServletRequest request, HttpServletResponse response, 
 			NextPage nextPage, IEnumFactoryEntity specEnum) {
 		
-		nextPage.setRedirectType(NextPage.REDIRECT_TYPE_REDIRECT);
-		nextPage.setPage(specEnum.getMyView(CommandNameEnum.Catalog.getName()));
+		nextPage.setRedirectType(NextPage.REDIRECT_TYPE_FORWARD);
+		nextPage.setPage(specEnum.getMyView(CommandNameEnum.Catalog.name()));
 		
 		return nextPage;
 	}
