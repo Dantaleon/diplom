@@ -14,8 +14,8 @@ public class AdminTableViewCP implements ICommandProcessor {
 	public NextPage execute(HttpServletRequest request, HttpServletResponse response, 
 			NextPage nextPage, IEnumFactoryEntity specEnum) {
 		
-		nextPage.setRedirectType(NextPage.REDIRECT_TYPE_REDIRECT);
-		nextPage.setPage(specEnum.getMyView(CommandNameEnum.AdminTableView.getName()));
+		nextPage.setRedirectType(NextPage.REDIRECT_TYPE_FORWARD);
+		nextPage.setPage(specEnum.getMyView(CommandNameEnum.AdminTableView.name()));
 		
 		return nextPage;
 	}

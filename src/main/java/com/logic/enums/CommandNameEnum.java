@@ -1,27 +1,23 @@
 package com.logic.enums;
 
-import com.logic.abstraction.ICommandProcessor;
-import com.logic.abstraction.IEnumFactoryEntity;
-import com.logic.command.*;
-
 public enum CommandNameEnum {
 	
-	Home("Home"),
-	ErrorPage404("ErrorPage404"),
-	Catalog("Catalog"),
-	Login("Login"),
-	Registration("Registration"),
-	Contact("Contact"),
-	About("About"),
-	AdminTableView("AdminTableView");
-
-	private String name;
+	// Command Name
+	Home,
+	ErrorPage404,
+	Catalog,
+	Login,
+	Logout,
+	Registration,
+	Contact,
+	About,
+	AdminTableView,
 	
-	CommandNameEnum(String name){
-		this.name = name;
-	}
+	// AJAX Command Name
+	HeaderInclude,
 	
-	public String getName() {
-		return name;
-	}
+	// AJAX admin table edit  Command Name
+	TableUser_acc,
+	TableRole;
+	
 }

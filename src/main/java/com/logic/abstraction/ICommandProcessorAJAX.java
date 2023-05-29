@@ -8,5 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface ICommandProcessorAJAX {
 	
-	void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+	void execute(HttpServletRequest request, HttpServletResponse response,
+			IEnumFactoryEntityAJAX specEnum) throws ServletException, IOException;
 }

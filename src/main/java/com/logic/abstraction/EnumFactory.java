@@ -18,7 +18,8 @@ public final class EnumFactory {
 	
 	public static IEnumFactoryEntity getSimpleEnum(HttpServletRequest request) {
 		
-		Enum<?> generalEnum = RoleEnums.valueOf(Resources.getRoleStr(request)).getSimpleEnum();
+		String role = Resources.getRoleStr(request);
+		Enum<?> generalEnum = RoleEnums.valueOf(role).getSimpleEnum();
 		
 		if (generalEnum instanceof CommandEnumAdmin) {
 			
@@ -34,15 +35,19 @@ public final class EnumFactory {
 		}
 	}
 	
-	public static IEnumFactoryEntity getAjaxEnum(HttpServletRequest request) {
+	public static IEnumFactoryEntityAJAX getAjaxEnum(HttpServletRequest request) {
 		
-		Enum<?> generalEnum = RoleEnums.valueOf(Resources.getRoleStr(request)).getAjaxEnum();
+		String role = Resources.getRoleStr(request);
+		Enum<?> generalEnum = RoleEnums.valueOf(role).getAjaxEnum();
+		if (generalEnum == null) {
+			System.out.println("GENERAL ENUM IS NULL");
+		}
 		
-		if (generalEnum instanceof CommandEnumAdmin) {
+		if (generalEnum instanceof CommandEnumAdminAJAX) {
 			
 			return (CommandEnumAdminAJAX) generalEnum;
 			
-		} else if (generalEnum instanceof CommandEnumUser) {
+		} else if (generalEnum instanceof CommandEnumUserAJAX) {
 			
 			return (CommandEnumUserAJAX) generalEnum;
 			

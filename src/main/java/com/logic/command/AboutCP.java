@@ -11,11 +11,11 @@ import com.utils.NextPage;
 public class AboutCP implements ICommandProcessor {
 
 	@Override
-	public NextPage execute(HttpServletRequest request, HttpServletResponse response, NextPage nextPage,
-			IEnumFactoryEntity specEnum) {
+	public NextPage execute(HttpServletRequest request, HttpServletResponse response, 
+			NextPage nextPage,IEnumFactoryEntity specEnum) {
 		
-		nextPage.setRedirectType(NextPage.REDIRECT_TYPE_REDIRECT);
-		nextPage.setPage(specEnum.getMyView(CommandNameEnum.About.getName()));
+		nextPage.setRedirectType(NextPage.REDIRECT_TYPE_FORWARD);
+		nextPage.setPage(specEnum.getMyView(CommandNameEnum.About.name()));
 		
 		return nextPage;
 	}

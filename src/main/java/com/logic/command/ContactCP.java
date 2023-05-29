@@ -14,8 +14,8 @@ public class ContactCP implements ICommandProcessor {
 	public NextPage execute(HttpServletRequest request, HttpServletResponse response, NextPage nextPage,
 			IEnumFactoryEntity specEnum) {
 		
-		nextPage.setRedirectType(NextPage.REDIRECT_TYPE_REDIRECT);
-		nextPage.setPage(specEnum.getMyView(CommandNameEnum.Contact.getName()));
+		nextPage.setRedirectType(NextPage.REDIRECT_TYPE_FORWARD);
+		nextPage.setPage(specEnum.getMyView(CommandNameEnum.Contact.name()));
 		
 		return nextPage;
 	}

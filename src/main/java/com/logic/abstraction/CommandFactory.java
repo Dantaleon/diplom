@@ -24,11 +24,11 @@ public final class CommandFactory {
 			
 		}catch(IllegalArgumentException iae) {
 			iae.printStackTrace();
-			return commandEnum.getMyCommand(CommandNameEnum.ErrorPage404.getName());
+			return commandEnum.getMyCommand(CommandNameEnum.ErrorPage404.name());
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			return commandEnum.getMyCommand(CommandNameEnum.ErrorPage404.getName());
+			return commandEnum.getMyCommand(CommandNameEnum.ErrorPage404.name());
 		}
 	}
 }
