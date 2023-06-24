@@ -15,34 +15,25 @@ import com.logic.abstraction.IEnumFactoryEntityAJAX;
 
 @WebServlet("/ControllerAJAX")
 public class ControllerAJAX extends HttpServlet {
-       
-    public ControllerAJAX() {
-        super();
-    }
+	public ControllerAJAX() {
+		super();
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		processRequest(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		processRequest(request, response);
 	}
-	
-	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	private void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		IEnumFactoryEntityAJAX specEnum = EnumFactory.getAjaxEnum(request);
 		
-		if (specEnum == null) {
-			System.out.println("specEnum IS NULL");
-		}
-		
 		ICommandProcessorAJAX commandProcessor = CommandFactoryAJAX.getCommand(request, specEnum);
-		
-		if (commandProcessor == null) {
-			System.out.println("commandProcessor IS NULL");
-		}
-		
 		commandProcessor.execute(request, response, specEnum);
-		
 	}
 }

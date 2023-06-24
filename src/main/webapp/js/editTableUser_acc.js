@@ -1,20 +1,63 @@
-// Load the CSS file dynamically
 var link = document.createElement('link');
 link.rel = 'stylesheet';
 link.type = 'text/css';
-link.href = '/css/DBTable.css';
+link.href = '/css/DBTable.css?';
 document.head.appendChild(link);
 
 function createRecord() {
     showEditDiv(true);
     showButtons('create');
 }
-function editRecord(key) {
-    showEditDiv(true);
-    showButtons('edit');
-    var retr = retrieveRecordByKey(key);
+function createRecordSubmit() {
+	var id = document.getElementById('inpId').value;
+	var nickname = document.getElementById('inpNickname').value;
+	var email = document.getElementById('inpEmail').value;
+	var password = document.getElementById('inpPassword').value;
+	
+	var params = '&sub=postNew&newId=' + id + '&newNickname=' + nickname
+		+ '&newEmail=' + email + '&newPassword=' + password;
+	
+	xhr = new XMLHttpRequest();
+	xhr.open('POST', '/ControllerAJAX?ActionCommand=TableUser_acc', true);
+
+	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	
+	xhr.onreadystatechange = function() {
+	    if(xhr.readyState == 4 && xhr.status == 200) {
+	      
+			let contentType = xhr.getResponseHeader('Content-Type');
+			console.log(xhr.responseText);
+	    }
+	}
+	
+	xhr.send(params);
 }
 
+function deleteRecord(uid) {
+	if (confirm('Вы действительно хоитите удалить запись пользователя?')) {
+		deleteRecordSubmit(uid);
+	} else {
+		console.log('Удаление отменено');
+	}
+}
+function deleteRecordSubmit(uid){
+	 
+	var params = '&sub=deleteUser&uid=' + uid;
+	
+	xhr = new XMLHttpRequest();
+	xhr.open('POST', '/ControllerAJAX?ActionCommand=TableUser_acc', true);
+
+	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	
+	xhr.onreadystatechange = function() {
+	    if(xhr.readyState == 4 && xhr.status == 200) {
+	      
+			console.log(xhr.responseText);
+	    }
+	}
+	
+	xhr.send(params);
+}
 function retrieveRecordByKey(key){
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', '/ControllerAJAX?ActionCommand=TableUser_acc&sub=getById&id=' + key, true);
@@ -40,13 +83,8 @@ function showEditDiv(isShow) {
 
 function showButtons(mode) {
     let btnCreate = document.getElementById('btnCreate');
-    let btnEdit = document.getElementById('btnEdit');
     if (mode === 'create') {
         btnCreate.style.display = 'block';
         btnEdit.style.display = 'none';
-    }
-    if (mode === 'edit') {
-        btnCreate.style.display = 'none';
-        btnEdit.style.display = 'block';
     }
 }

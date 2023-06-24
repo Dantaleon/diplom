@@ -7,27 +7,27 @@
 <table>
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Nickname</th>
-      <th>Email</th>
-      <th>Пароль</th>
+      <th class="alignCenter">ID</th>
+      <th class="alignCenter">Nickname</th>
+      <th class="alignCenter">Email</th>
+      <th class="alignCenter">Пароль</th>
+      <th class="alignCenter">Удаление</th>
     </tr>
   </thead>
   <tbody>
     <c:forEach var="user" items="${userList}">
       <tr>
-        <td>${user.id}</td>
-        <td>${user.nickname}</td>
-        <td>${user.email}</td>
-        <td>${user.password}</td>
-        <td><button onclick="editRecord(${user.id})">Редактировать</button></td>
-        <td><button onclick="deleteRecord(${user.id})">Удалить</button></td>
+        <td class="alignCenter">${user.id}</td>
+        <td class="alignLeft">${user.nickname}</td>
+        <td class="alignLeft">${user.email}</td>
+        <td class="alignLeft">${user.password}</td>
+        <td class="alignCenter"><button class="deleteBtn"onclick="deleteRecord(${user.id})">Удалить</button></td>
       </tr>
     </c:forEach>
   </tbody>
 </table>
 <div>
-	<button onclick="createRecord()">Создать</button>
+	<button class="createBtn" onclick="createRecord()">Создать</button>
 </div>
 
 <div id="editRecord" hidden="hidden">
@@ -37,7 +37,7 @@
 			<label for="id">ID: </label>
 		</td>
 		<td>
-			<input type=number name="nickname"></input>
+			<input id="inpId" type=number name="id" required="required"></input>
 		</td>
 	</tr>
 	<tr>
@@ -45,7 +45,7 @@
 			<label for="nickname">Nickname: </label>
 		</td>
 		<td>
-			<input type=text name="nickname"></input>
+			<input id="inpNickname" type=text name="nickname" required="required"></input>
 		</td>
 	</tr>
 	<tr>
@@ -53,23 +53,20 @@
 			<label for="email">Email: </label>
 		</td>
 		<td>
-			<input type=email name="email"></input>
+			<input id="inpEmail" type=email name="email" required="required"></input>
 		</td>
 	<tr>
 		<td>
 			<label for="password">Пароль: </label>
 		</td>
 		<td>
-			<input type=text name="password"></input>
+			<input id="inpPassword" type=text name="password" required="required"></input>
 		</td>
 	</tr>
 	<tr>
 	<td>
-		<button id="btnCreate">Создать</button>
-		<button id="btnEdit">Редактировать</button>
-	</td>
-	<td>
-		<button id="btnClear">Очистить</button>
+		<button class="createBtn" id="btnCreate" onclick="createRecordSubmit()">Создать</button>
+		<button class="editBtn" id="btnEdit" onclick="editRecordSubmit()">Редактировать</button>
 	</td>
 	</tr>
 	</table>

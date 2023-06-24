@@ -32,12 +32,22 @@ li.userLink {
 html, body {
 	padding: 0;
 	margin: 0;
-	height: 100%;
+	width: 100%;
+	height: calc(100% + 100px);
 }
 
 body {
 	display: flex;
 	flex-direction: column;
+	align-items: stretch;
+	min-height: calc(100vh + 100px);
+	background: repeating-conic-gradient(
+		from 45deg at 15% 50%,  
+		white 0deg 10deg,  
+		#9b9b9b 10deg 20deg,  
+		black 20deg 30deg
+	);
+	overflow-x: hidden;
 }
 
 div main-menu {
@@ -55,6 +65,10 @@ p {
 }
 
 #p-error {
+	background-color: #9a9a9a;
+	background-color: #b2b2b2;
+	background-color: #cfcfcf;
+	
 	background-color: #ff8080;
 }
 
@@ -63,11 +77,12 @@ p {
 }
 
 footer {
-  	margin-top: auto;
+	margin-top: auto;
+	height: 100px;
   	background-color: #222;
   	color: #fff;
-  	padding: 20px;
-  	position: absolute;
+  	position: relative;
   	bottom: 0;
   	width: 100%;
+  	clear: both;
 }

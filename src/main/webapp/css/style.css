@@ -1,5 +1,5 @@
 #canvas1 {
-	background-color: lightgray;
+	background-color: rgba(118, 189, 187, 0.9);;
 	border-width: 5;
 }
 #divmain {
@@ -10,52 +10,25 @@
 }
 #myImages {
 	position: absolute;
-	top: 90%;
-	left: 30%;
-	transform: translate(-50%,-50%);
+	top: 75%;
+	left: 10%;
+	min-width: 500px;
+	min-heaight: 500px;
+	max-width: 500px;
+	max-height: 500px;
+	overflow-x: scroll;
+	overflow-y: scroll;
 }
-#myImages img.layer1{
-	width: 150px;
-	height: 200px;
-}
-#myImages img.layer2{
-	width: 150px;
-	height: 200px;
-}
-#myImages img.layer3{
-	width: 150px;
-	height: 200px;
+#myImages img{
+	max-width: 200px;
+	max-height: 100px;
+	display: inline-block;
+	padding: 10px;
 }
 #divButtons {
 	position: absolute;
-	top: 50%;
-	left: 15%;
-	transform: translate(-50%, -50%);
-	background-color: lightgray;
+	top: 20%;
+	left: 10%;
+	height: 50%;
+	overflow-y: scroll;
 }
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  background-color: #111;
-}
-
-

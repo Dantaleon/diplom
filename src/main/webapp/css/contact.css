@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+#contactDiv {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+#contactInfo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: inline-block;
+	max-height: 400px;
+	max-width: 50%;
+	height: auto;
+	background-color: rgba(118, 189, 187, 0.9);
+}

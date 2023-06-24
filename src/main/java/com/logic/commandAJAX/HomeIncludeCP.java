@@ -18,7 +18,5 @@ public class HomeIncludeCP implements ICommandProcessorAJAX {
 		
 		request.getRequestDispatcher(CommandEnumUserAJAX.HomeInclude.getView())
 		.include(request, response);
-
 	}
-
 }

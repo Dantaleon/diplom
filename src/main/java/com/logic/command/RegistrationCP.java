@@ -11,29 +11,21 @@ import com.model.entity.User;
 import com.utils.NextPage;
 
 public class RegistrationCP implements ICommandProcessor {
-
 	@Override
 	public NextPage execute(HttpServletRequest request, HttpServletResponse response, NextPage nextPage,
 			IEnumFactoryEntity specEnum) {
-		
 		UserDAO userDao = new UserDAO();
-		
 		if (request.getMethod().equals("GET") && !request.getMethod().equals("POST")) {
-			
 			nextPage.setRedirectType(NextPage.REDIRECT_TYPE_FORWARD);
 			nextPage.setPage(specEnum.getMyView(CommandNameEnum.Registration.name()));
-			
 			return nextPage;
 		}
-		
 		String nickname = request.getParameter("nickname");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String confirmPassword = request.getParameter("confirmPassword");
-		
 		StringBuilder error = new StringBuilder();
 		StringBuilder noError = new StringBuilder();
-		
 		if (nickname == null || nickname.trim().isEmpty()) {
 			error.append("Имя пользователя не введено <br />");
 		}
@@ -54,25 +46,18 @@ public class RegistrationCP implements ICommandProcessor {
 		}
 		if (error.length() > 0) {
 			request.setAttribute("error", error);
-		
 		} else {
 			User user = new User(nickname, email, password);
-			
 			try {
 				userDao.registerUser(user);
-			}catch(Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			noError.append("Аккаунт успешно зарегистрирован");
 			request.setAttribute("noError", noError);
-		
 		}
-		
 		nextPage.setRedirectType(NextPage.REDIRECT_TYPE_FORWARD);
 		nextPage.setPage(specEnum.getMyView(CommandNameEnum.Registration.name()));
-		
 		return nextPage;
-		
 	}
-
 }

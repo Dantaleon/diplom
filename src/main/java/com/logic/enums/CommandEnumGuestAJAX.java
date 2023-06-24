@@ -8,6 +8,7 @@ import com.logic.command.LogoutCP;
 import com.logic.commandAJAX.FooterIncludeCP;
 import com.logic.commandAJAX.HeaderIncludeCP;
 import com.logic.commandAJAX.HomeIncludeCP;
+import com.logic.commandAJAX.PieceUCP;
 
 public enum CommandEnumGuestAJAX implements IEnumFactoryEntityAJAX {
 	
@@ -15,8 +16,9 @@ public enum CommandEnumGuestAJAX implements IEnumFactoryEntityAJAX {
 	HeaderInclude(new HeaderIncludeCP(), "/WEB-INF/jsp/navigations/guestNavigation.jsp"),
 	HomeInclude(new HomeIncludeCP(), "/WEB-INF/jsp/himeMain.jsp"),
 	FooterInclude(new FooterIncludeCP(), "/WEB-INF/jsp/footer.jsp"),
-	Logout(new LogoutCP(), "/WEB-INF/jsp/index.jsp");
-	//FileInclude(new FileIncludeCP(), "/WEB-INF/jsp/404.jsp");
+	Logout(new LogoutCP(), "/WEB-INF/jsp/index.jsp"),
+	
+	PieceUCP(new PieceUCP(), "/WEB-INF/jsp/design.jsp");
 	
 	private String view;
 	private ICommandProcessorAJAX commandAJAX;

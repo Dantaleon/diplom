@@ -1,5 +1,43 @@
 @charset "UTF-8";
 table {
-	background-color: lightgray;
+	background-color: rgba(118, 189, 187, 0.9);
+	padding: 20px 10px;
 	
+}
+td {
+	padding: 5px;
+}
+.alignCenter {
+	text-align: center;
+}
+.alignRight {
+	text-align: right;
+}
+.alignLeft {
+	text-align: left;
+}
+button {
+	border: none;
+	padding: 5px;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+.editBtn {
+	background-color: #ff9f71;
+}
+
+.createBtn {
+	background-color: #4CAF50;
+}
+
+.deleteBtn {
+	background-color: #f44336;
+}
+
+img {
+	max-width: 200px;
+	max-height: 100px;
 }

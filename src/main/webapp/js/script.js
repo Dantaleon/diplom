@@ -4,6 +4,8 @@ const divImg = document.getElementById('myImages');
 
 const labelx = document.getElementById('labelx');
 const labely = document.getElementById('labely');
+const lablew = document.getElementById('labelw');
+const lableh = document.getElementById('labelh');
 
 var lastClicked;
 
@@ -16,12 +18,16 @@ window.onload = function(){
 	console.log('ready fired');
 	ready1();
 	
+	
 }
+
+
 
 class WindowPart {
 
-	constructor(imagePath, x, y, w, h, level){
-
+	constructor(id, imagePath, x, y, w, h, level){
+		
+		this.id = id;
 		this.image = new Image(w, h);
 		this.image.src = imagePath;
 		this.level = level;
@@ -56,6 +62,12 @@ class WindowPart {
 	moveY(value) {
 		this.y = value;
 	}
+	resizeW(value) {
+		this.width = value;
+	}
+	resizeH(value) {
+		this.height = value;
+	}
 }
 
 function showVal(value, axis) {
@@ -67,6 +79,14 @@ function showVal(value, axis) {
 	if (axis == 'y') {
 		labely.value = value;
 		lastClicked.moveY(value);
+	}
+	if (axis == 'w') {
+		labelw.value = value;
+		lastClicked.resizeW(value);
+	}
+	if (axis == 'h') {
+		labelh.value = value;
+		lastClicked.resizeH(value);
 	}
 	drawLevels();
 }
@@ -129,33 +149,89 @@ function removeChild(windowPart, div) {
 	
 }
 function reloadDivByLayer(level){
+	
 	divImg.innerHTML = "";
-
-	for (let i = 0; i < allItems.length; i++){
-		if (allItems[i].hasLayerClass(level)){
-			addPartToDiv(allItems[i], divImg);
-		}
+	
+	xhr = new XMLHttpRequest();
+	xhr.open('GET', '/ControllerAJAX?ActionCommand=PieceUCP&sub=getPiecesByType&type=' + level, true);
+	
+	xhr.onreadystatechange = function() {
+	    if(xhr.readyState == 4 && xhr.status == 200) {
+	      
+			var jsonString = this.responseText;
+    		try {
+			  var jsonObject = JSON.parse(jsonString);
+			  drawJsonToDiv(jsonObject);
+			} catch (e) {
+			  console.log("Error parsing JSON");
+			}
+	    }
 	}
+	
+	xhr.send();
+	
 }
+function drawJsonToDiv(jsonArray) {
+	
+	for (var i = 0; i < jsonArray.length; i++) {
+  		
+  		var obj = jsonArray[i];
+  		var winPart = new WindowPart(obj.id,
+			  'data:image/png;base64,' + obj.image, obj.picx, obj.picy,
+  			obj.picw, obj.pich, 1);
+  		
+  		addPartToDiv(winPart, divImg);
+  		
+  	}
+	
+}
+
+function saveXYWH() {
+	
+	let pieceId = lastClicked.id;
+	
+	xhr = new XMLHttpRequest();
+	xhr.open('POST', '/ControllerAJAX?ActionCommand=TablePiece&sub=saveXYWH&id=' + pieceId , true);
+	xhr.setRequestHeader('Content-type', 'application/json');
+	
+	xhr.onreadystatechange = function() {
+	    if(xhr.readyState == 4 && xhr.status == 200) {
+	      
+			var strResp = this.responseText;
+    		console.log(strResp);
+	    }
+	}
+	
+	let jsonObj = {
+		id: pieceId,
+		picx: lastClicked.x,
+		picy: lastClicked.y,
+		picw: lastClicked.width,
+		pich: lastClicked.height
+	};
+	
+	let strJson = JSON.stringify(jsonObj);
+	
+	xhr.send(strJson);
+}
+
 function ready1(){
-	//let window1 = new WindowPart("images/window1.png", 100, 200, 200, 200, 1);
-	//allItems.push(window1);
-	//let window2 = new WindowPart("images/window2.png", 300, 200, 200, 200, 2);
-	//allItems.push(window2);
-	//let window3 = new WindowPart("images/window3.png", 500, 200, 200, 200, 3);
-	//allItems.push(window3);
-
-	let base = new WindowPart("../images_native/base1.png", 720, 154, 720*1/2, 1121*1/2, 1)
-	allItems.push(base);
-	base = new WindowPart("../images_native/base2.png", 720, 154, 720*1/2, 1121*1/2, 1)
-	allItems.push(base);
-	allItems.push(new WindowPart("../images_native/top1.png", 637, 0, 720*1/2, 1121*1/2, 2));
-	allItems.push(new WindowPart("../images_native/top2.png", 637, 0, 720*1/2, 1121*1/2, 2));
-	allItems.push(new WindowPart("../images_native/bottom1.png", 718, 407, 720*1/2, 1121*1/2, 2));
-	allItems.push(new WindowPart("../images_native/bottom2.png", 718, 407, 720*1/2, 1121*1/2, 2));
-	allItems.push(new WindowPart("../images_native/side1.png", 688, 115, 720*1/2, 1121*1/2, 3));
-	allItems.push(new WindowPart("../images_native/side2.png", 688, 115, 720*1/2, 1121*1/2, 3));
-	allItems.push(new WindowPart("../images_native/side1.png", 879, 113, 720*1/2, 1121*1/2, 3));
-	allItems.push(new WindowPart("../images_native/side2.png", 879, 113, 720*1/2, 1121*1/2, 3));
+	
 }
+function clearCanvas() {
+	ctx.clearRect(0,0, canvas.width, canvas.height);
+	divItems.length = 0;
+}
+function createWindow() {
+	var windowParts = [];
+	for (let i = 0; i < divItems.length; i++) {
+		windowParts[i] = {id: divItems[i].id};
 
+	}
+	console.log(windowParts);
+	let jsonWindowParts = JSON.stringify(windowParts);
+	const wxhr = new XMLHttpRequest();
+	wxhr.open('POST','/Controller?ActionCommand=MyCart&sub=addFromDesign');
+	wxhr.setRequestHeader('Content-Type', 'application/json');
+	wxhr.send(jsonWindowParts);
+}

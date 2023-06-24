@@ -17,7 +17,5 @@ public class FooterIncludeCP implements ICommandProcessorAJAX {
 			throws ServletException, IOException {
 		request.getRequestDispatcher(CommandEnumUserAJAX.FooterInclude.getView())
 		.include(request, response);
-
 	}
-
 }

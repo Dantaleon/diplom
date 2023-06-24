@@ -1,0 +1,40 @@
+@charset "UTF-8";
+#loginForm {
+	position: relative;
+	left: calc(50%+100px);
+	right:calc(50%+100px);
+	transform: translate(-calc(50%+100px),-calc(50%+100px));
+	margin:auto;
+	background-color: rgba(118, 189, 187, 0.9);
+	color: black;
+	padding: 10px;
+}
+
+#loginForm th{
+	align-content: center;
+}
+
+#loginForm a:hover, a {
+	color: white;
+	
+}
+#loginForm input[type=submit]{
+	background-color: white;
+	width: 80px;
+	height: 25px;
+	color: black;
+	border: none;
+	padding: 5px;
+}
+
+#loginForm input[type=submit]:hover {
+	cursor: pointer;
+	background-color: black;
+	color: white;
+}
+.alnRight {
+	text-align: right;
+}
+.alnCenter {
+	text-align: center;
+}

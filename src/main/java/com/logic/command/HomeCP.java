@@ -9,17 +9,11 @@ import com.logic.enums.CommandNameEnum;
 import com.utils.NextPage;
 
 public class HomeCP implements ICommandProcessor {
-
 	@Override
 	public NextPage execute(HttpServletRequest request, HttpServletResponse response,
 			NextPage nextPage, IEnumFactoryEntity specEnum) {
-		
 		nextPage.setRedirectType(NextPage.REDIRECT_TYPE_FORWARD);
 		nextPage.setPage(specEnum.getMyView(CommandNameEnum.Home.name()));
-		
-		System.out.println("HomeCP ended " + nextPage.getPage() + 
-				" " + nextPage.getRedirectType());
 		return nextPage;
 	}
-
 }

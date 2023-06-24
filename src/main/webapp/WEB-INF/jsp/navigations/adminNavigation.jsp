@@ -5,13 +5,14 @@
 
 <div class="main-menu">
 	<ul>
-		<li><a href="http://localhost:8080/Controller?ActionCommand=Home">Home</a></li>
-		<li><a href="http://localhost:8080/Controller?ActionCommand=Catalog">Catalog</a></li>
-		<li><a href="#">Design</a></li>
-		<li><a href="#">Upload Image</a></li>
-		<li><a href="http://localhost:8080/ControllerAJAX?ActionCommand=Logout">Logout</a></li>
-		<li><a href="#">Contact</a></li>
-		<li><a href="#">About</a></li>
+		<li><a href="http://localhost:8080/Controller?ActionCommand=Home">Домой</a></li>
+		<li><a href="http://localhost:8080/Controller?ActionCommand=Catalog">Каталог</a></li>
+		<li><a href="http://localhost:8080/Controller?ActionCommand=Design">Дизайн</a></li>
+		<li><a href="http://localhost:8080/Controller?ActionCommand=MyCart">Корзина</a></li>
+		<li><a href="http://localhost:8080/Controller?ActionCommand=MyOrders">Заказы</a></li>
+		<li><a href="http://localhost:8080/ControllerAJAX?ActionCommand=Logout">Выход</a></li>
+		<li><a href="http://localhost:8080/Controller?ActionCommand=AdminTableView">Таблицы БД</a></li>
+		<li><a href="http://localhost:8080/Controller?ActionCommand=Contact">Контакты</a></li>
 		<li class="userLink">${nickname}[${role}](id:${id})</li>
 	</ul>
 </div>

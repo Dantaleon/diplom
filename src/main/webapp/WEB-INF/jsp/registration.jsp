@@ -5,14 +5,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Регистрация</title>
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/registration.css" />
 </head>
 <body>
 	<jsp:include page="/ControllerAJAX?ActionCommand=HeaderInclude" />
-	<form method="post" action="/Controller?ActionCommand=Registration">
+	<form id="regForm" method="post" action="/Controller?ActionCommand=Registration">
 		<table>
 		<th colspan="2"><h2>Регистрация</h2></th>
 			<tr>
-				<td>
+				<td class="alnRight">
 					<label for="nickname">Имя пользователя: </label>
 				</td>
 				<td>
@@ -20,7 +21,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td class="alnRight">
 					<label for="email">Эл. Почта: </label>
 				</td>
 				<td>
@@ -28,7 +29,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td class="alnRight">
 					<label for="password">Пароль: </label>
 				</td>
 				<td>
@@ -36,7 +37,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td class="alnRight">
 					<label for="confirmPassword">Повторите пароль: </label>
 				</td>
 				<td>
@@ -44,14 +45,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td colspan="2" class="alnCenter">
 					<input type="submit" value="Подтвердить"></input>
 				</td>
 			</tr>
 			<tr>
-				<td><br>Уже есть аккаунт? <a href="/Controller?ActionCommand=Login">Вход</a></td>
+				<td colspan="2" class="alnCenter"><br>Уже есть аккаунт? <a href="/Controller?ActionCommand=Login">Вход</a></td>
 			</tr>
 		</table>
 	</form>
+	<jsp:include page="/ControllerAJAX?ActionCommand=FooterInclude" />
 </body>
 </html>

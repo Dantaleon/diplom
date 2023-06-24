@@ -7,46 +7,46 @@ import com.logic.command.*;
 public enum CommandEnumAdmin implements IEnumFactoryEntity {
 	INSTANCE,
 	Home(new HomeCP(), "/WEB-INF/jsp/index.jsp"),
-	Catalog(new CatalogCP(), "/WEB-INF/jsp/view3images.jsp"),
+	Catalog(new CatalogCP(), "/WEB-INF/jsp/catalog.jsp"),
 	Login(new LoginCP(), "/WEB-INF/jsp/login.jsp"),
 	Registration(new RegistrationCP(), "/WEB-INF/jsp/registration.jsp"),
-	Contact(new ContactCP(), "/WEB-INF/jsp/contact.jsp"),
-	About(new AboutCP(), "/WEB-INF/jsp/about.jsp"),
+	Contact(new ContactCP(), "/WEB-INF/jsp/contacts.jsp"),
 	AdminTableView(new AdminTableViewCP(), "/WEB-INF/jsp/admin-table-view.jsp"),
-	ErrorPage404(new ErrorPage404CP(), "/WEB-INF/jsp/404.jsp");
-	
+	ErrorPage404(new ErrorPage404CP(), "/WEB-INF/jsp/404.jsp"),
+	Design(new DesignCP(), "/WEB-INF/jsp/design.jsp"),
+	MyCart(new MyCartCP(), "/WEB-INF/jsp/my-cart.jsp"),
+	MyOrders(new MyOrdersCP(), "/WEB-INF/jsp/my-orders.jsp"),
+	WindowDetails(new WindowDetailsCP(), "/WEB-INF/jsp/window-details.jsp"),
+	OrderDetails(new OrderDetailsCP(), "/WEB-INF/jsp/order-details.jsp"),
+	// CName
+	CHome(new ErrorPage404CP(), "/Controller?ActionCommand=Home");
+
 	private ICommandProcessor command;
 	private String view;
-	
-	CommandEnumAdmin(ICommandProcessor command, String view){
+
+	CommandEnumAdmin(ICommandProcessor command, String view) {
 		this.command = command;
 		this.view = view;
 	}
-	
+
 	CommandEnumAdmin() {
 	}
 
 	public ICommandProcessor getCommand() {
 		return command;
 	}
-	
+
 	public String getView() {
 		return view;
 	}
 
 	@Override
 	public ICommandProcessor getMyCommand(String name) {
-		
 		return this.valueOf(name).getCommand();
-		
 	}
 
 	@Override
 	public String getMyView(String name) {
-		
 		return this.valueOf(name).getView();
 	}
-	
-	
-	
 }

@@ -38,11 +38,7 @@ public class HeaderIncludeCP implements ICommandProcessorAJAX {
 			request.getRequestDispatcher(CommandEnumGuestAJAX.HeaderInclude.getView())
 			.include(request, response);
 		}
-		
-		
-		
+	
 	}
-	
-	
 	
 }

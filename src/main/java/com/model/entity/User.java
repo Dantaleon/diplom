@@ -60,8 +60,5 @@ public class User implements JSONString {
 	public String toJSONString() {
 		JSONObject jsObj = new JSONObject(this);
 		return jsObj.toString();
-	}
-	
-	
-	
+	}	
 }
